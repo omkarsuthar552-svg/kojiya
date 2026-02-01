@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sister 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 24px;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      position: relative;
+      height: 60px;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #adb5bd;
+      color: white;
+      position: absolute;
+      left: 120px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
+      display: none;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 30px;
+      animation: float 3s linear forwards;
+    }
+
+    @keyframes float {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>You are my cute sister, <span id="name">Sumu</span>? 💖</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 😍</button>
+    <button id="no">No 🙈</button>
+  </div>
+
+  <div id="result">🥰 Yay! I Love You Gudiya❤️</div>
+</div>
+
+<audio id="song">
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // 👉 Change name here
+  document.getElementById("name").innerText = "Riya";
+
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const result = document.getElementById("result");
+  const song = document.getElementById("song");
+
+  // No button prank
+  noBtn.addEventListener("touchstart", moveNo);
+  noBtn.addEventListener("mouseover", moveNo);
+
+  function moveNo() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 120 - 60;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  // Yes click
+  yesBtn.addEventListener("click", () => {
+    result.style.display = "block";
+    song.play();
+    createEmojis();
+  });
+
+  function createEmojis() {
+    const emojis = ["❤️","💖","😍","😘","💕","💋","🥰"];
+    for (let i = 0; i < 25; i++) {
+      const span = document.createElement("span");
+      span.className = "emoji";
+      span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * window.innerWidth + "px";
+      span.style.top = "80%";
+      document.body.appendChild(span);
+
+      setTimeout(() => {
+        span.remove();
+      }, 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
